@@ -1,4 +1,4 @@
-mygithubpage
+WheatonConnections
 ============
 
 Wheaton Course Connections
