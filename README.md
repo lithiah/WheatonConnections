@@ -1,2 +1,4 @@
 mygithubpage
 ============
+
+Wheaton Course Connections
