@@ -1,5 +1,0 @@
-WheatonConnections
-============
-
-Wheaton Course Connections
-

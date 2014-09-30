@@ -1,6 +1,7 @@
 <DOCTYPE! html>
 <html>
 <head>
+<<<<<<< HEAD
 	<title>Wheaton Connections</title>
 	<link rel="uikit.css" type="text/css">
 </head>
@@ -11,3 +12,41 @@ Testing!
 
 </body>
 </html>
+=======
+	<title>GATRA140</title>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+</head>
+<style>
+	#map { height: 100%; width: 100%;}
+</style>
+
+<body>
+	 <div id="map"></div>
+
+</body>
+<script type="text/javascript">
+	var map = L.map('map').setView([41.96637487281224, -71.18580043315887], 13);
+
+	L.tileLayer('http://{s}.tiles.mapbox.com/v3/akuisara.jkpmjj5n/{z}/{x}/{y}.png', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	    maxZoom: 18
+	}).addTo(map);
+
+	var marker = L.marker([41.96637487281224, -71.18580043315887]).addTo(map);
+
+	var circle = L.circle([41.96637487281224, -71.18580043315887], 500, {
+	    color: 'red',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5
+	}).addTo(map);
+
+	var polygon = L.polygon([
+		[41.96637487281224, -72.18580043315887],
+		[41.96637487281224, -73.18580043315887],
+		[42.96637487281224, -73.18580043315887]
+		]).addTo(map);
+</script>
+</html>
+>>>>>>> gh-pages
