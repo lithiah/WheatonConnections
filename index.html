@@ -43,9 +43,9 @@
 		<div class="uk-panel uk-panel-box">
 			<ul class="uk-tab" data-uk-tab="{connect:'#tabcontent'}">
     			<li class="uk-active"><a href="#">Division</a></li>
-    			<li class><a href="#">Major</a></li>
-    			<li class><a href="#">Minor</a></li>
-    			<li class><a href="#">Course</a></li>
+    			<li class><a href="#">Department</a></li>
+    			<li data-uk-tooltip="{pos:'top'}" title="All connections with one or more courses being offered in the selected semester will appear." class><a href="#">Semester</a></li>
+                <li class data-uk-tooltip title=""><a href="#">Courses</a></li>
 			</ul>
 			<ul id="tabcontent" class="uk-switcher uk-margin">
     			<li class="uk-active">
@@ -57,9 +57,46 @@
     					</fieldset>
 					</form>
     			</li>
-    			<li class>Major</li>
-    			<li class="">Minor</li>
-    			<li class="">Course</li>
+    			<li class>
+                    <form class="uk-form">
+                        <fieldset>
+                            <div class="uk-form-row"><label><input type="checkbox"> Anthropology</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Art &amp; Art History</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Biology</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Chemistry</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Classics</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Economics</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Education</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> English</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> French Studies</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> German</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Hispanic and Italian Studies</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> History</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Mathematics and Computer Science</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Music</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Philosophy</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Physics and Astronomy</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Political Science</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Psychology</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Religion</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Russian and Russian Studies</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Sociology</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Theatre and Dance Studies</label></div>
+                        </fieldset>
+                    </form>
+                </li>
+    			<li class="">
+                    
+                    <form class="uk-form">
+                        <fieldset>
+                            <div class="uk-form-row"><label><input type="checkbox"> Spring 2014</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Fall 2015</label></div>
+                            <div class="uk-form-row"><label><input type="checkbox"> Fall 2016</label></div>
+                        </fieldset>
+                    </form>
+                    <span style="text-align: right;"></span>
+                </li>
+                <li class="">Course</li>
 			</ul>
 		</div>
 	</div>
