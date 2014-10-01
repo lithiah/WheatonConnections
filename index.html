@@ -1,39 +1,87 @@
 <DOCTYPE! html>
 <html>
 <head>
-	<title>GATRA140</title>
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-
+	<title>Wheaton Connections</title>
+	<link rel="stylesheet" href="style/uikit.almost-flat.min.css"/>
+	<link rel="stylesheet" href="style/style.css"/>
+    <script src="style/jquery-1.11.1.min.js"></script>
+    <script src="style/uikit.min.js"></script>
 </head>
-<style>
-	#map { height: 100%; width: 100%;}
-</style>
 
 <body>
-	 <div id="map"></div>
+
+<div id="mainbody" class="uk-grid">
+
+	<div class="uk-width-1-1">
+    	<div class="uk-panel uk-panel-box uk-panel-box-primary">
+    		<div class="uk-panel-title uk-text-large"><h1>Wheaton Connections</h1></div>
+    		<div>This website allows you to browse the pre-approved connections available at Wheaton College (MA). Connections are sorted by number of courses within the connection (always either two or three), the divisions of the courses, and the major and minor departments of the courses. In addition, one specific course can be selected, and the connections that include that course will be displayed. (Only courses that are part of a connection are listed.)</div>
+    	</div>
+	</div>
+
+</div>
+
+<div id="mainbody" class="uk-grid">
+
+	<div class="uk-width-1-3">
+        <div class="uk-panel uk-panel-box">
+            <form class="uk-form">
+                <fieldset>
+                    <label><input type="checkbox"> 2 Course Connections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="checkbox"> 3 Course Connections</label>
+                </fieldset>
+            </form>
+        </div>
+		<div class="uk-panel uk-panel-box">
+			<ul class="uk-tab" data-uk-tab="{connect:'#tabcontent'}">
+    			<li class="uk-active"><a href="#">Division</a></li>
+    			<li class><a href="#">Major</a></li>
+    			<li class><a href="#">Minor</a></li>
+    			<li class><a href="#">Course</a></li>
+			</ul>
+			<ul id="tabcontent" class="uk-switcher uk-margin">
+    			<li class="uk-active">
+    				<form class="uk-form">
+    					<fieldset>
+        					<div class="uk-form-row"><label><input type="checkbox"> Natural Sciences</label></div>
+        					<div class="uk-form-row"><label><input type="checkbox"> Social Sciences</label></div>
+        					<div class="uk-form-row"><label><input type="checkbox"> Humanities</label></div>
+    					</fieldset>
+					</form>
+    			</li>
+    			<li class>Major</li>
+    			<li class="">Minor</li>
+    			<li class="">Course</li>
+			</ul>
+		</div>
+	</div>
+
+    <div class="uk-width-2-3">
+        <div class="uk-panel uk-panel-box">
+            <dl class="uk-description-list-horizontal">
+                <dt><a href="http://wheatoncollege.edu/catalog/conx_23007/">CONX 23007</a></dt>
+                <dd><h3>African Diaspora in New World</h3>
+                    <dl class="uk-description-list-horizontal">
+                        <dt>Creative Arts</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/musc_272/">MUSC 272</a> African American Originals I: Spirituals, Blues and All That Jazz</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/musc_273/">MUSC 273</a> African American Originals II: Rhythm and Blues, Rock and Contemporary Jazz</dd>
+                            <dd> </dd>
+                        <dt>History</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/hist_209/">HIST 209</a> African American History to 1877</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/hist_210/">HIST 210</a> African American History: 1877 to the Present</dd>
+                            <dd> </dd>
+                        <dt>Social Sciences</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/soc_230/">SOC 230</a> Race and Ethnicity</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/wgs_315/">WGS 315</a> Black Feminist Theory</dd>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+</div>
+
+
+	
 
 </body>
-<script type="text/javascript">
-	var map = L.map('map').setView([41.96637487281224, -71.18580043315887], 13);
-
-	L.tileLayer('http://{s}.tiles.mapbox.com/v3/akuisara.jkpmjj5n/{z}/{x}/{y}.png', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18
-	}).addTo(map);
-
-	var marker = L.marker([41.96637487281224, -71.18580043315887]).addTo(map);
-
-	var circle = L.circle([41.96637487281224, -71.18580043315887], 500, {
-	    color: 'red',
-	    fillColor: '#f03',
-	    fillOpacity: 0.5
-	}).addTo(map);
-
-	var polygon = L.polygon([
-		[41.96637487281224, -72.18580043315887],
-		[41.96637487281224, -73.18580043315887],
-		[42.96637487281224, -73.18580043315887]
-		]).addTo(map);
-</script>
 </html>
