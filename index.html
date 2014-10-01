@@ -8,14 +8,22 @@
     <script src="style/uikit.min.js"></script>
 </head>
 
-<body>
+<body style="background-color: #381252">
 
 <div id="mainbody" class="uk-grid">
 
 	<div class="uk-width-1-1">
     	<div class="uk-panel uk-panel-box uk-panel-box-primary">
     		<div class="uk-panel-title uk-text-large"><h1>Wheaton Connections</h1></div>
-    		<div>This website allows you to browse the pre-approved connections available at Wheaton College (MA). Connections are sorted by number of courses within the connection (always either two or three), the divisions of the courses, and the major and minor departments of the courses. In addition, one specific course can be selected, and the connections that include that course will be displayed. (Only courses that are part of a connection are listed.)</div>
+    		<div>This website allows you to browse the pre-approved connections available at Wheaton College (MA). Connections are sorted by number of courses within the connection (always either two or three), the divisions of the courses, and the major and minor departments of the courses. In addition, one specific course can be selected, and the connections that include that course will be displayed. (Only courses that are part of a connection are listed.)
+            <p style="text-align: right; padding-right: 10px"><a href="#credits" data-uk-modal>Credit where credit is due.</a></p>
+            <div id="credits" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <a class="uk-modal-close uk-close"></a>
+                This website was created by Sara Zhang and Lithia Helmreich of Wheaton College for a computer science course homework assignment (<a href="https://github.com/WheatonWHALE/comp398/blob/master/hw/hw11.md">#11</a> to be exact). All connection information was taken from the Wheaton College website connections listings, found <a href="http://wheatoncollege.edu/academics/the-wheaton-curriculum/connections/connections-list/">here</a>.
+            </div>
+            </div>
+            </div>
     	</div>
 	</div>
 
@@ -58,9 +66,17 @@
 
     <div class="uk-width-2-3">
         <div class="uk-panel uk-panel-box">
-            <dl class="uk-description-list-horizontal">
-                <dt><a href="http://wheatoncollege.edu/catalog/conx_23007/">CONX 23007</a></dt>
-                <dd><h3>African Diaspora in New World</h3>
+            <ul class="uk-subnav uk-subnav-pill" data-uk-switcher="{connect:'#connection-info'}">
+                <li><a href="#">African Diaspora in New World</a></li>
+                <li><a href="#">African Worlds</a></li>
+            </ul>
+
+        </div>
+        <div class="uk-panel uk-panel-box">
+
+            <ul id="connection-info" class="uk-switcher">
+                <li>
+                    <h3><a href="http://wheatoncollege.edu/catalog/conx_23007/">Connection 23007: African Diaspora in New World (Choose 2 or 3)</a></h3>
                     <dl class="uk-description-list-horizontal">
                         <dt>Creative Arts</dt>
                             <dd><a href="http://wheatoncollege.edu/catalog/musc_272/">MUSC 272</a> African American Originals I: Spirituals, Blues and All That Jazz</dd>
@@ -73,8 +89,28 @@
                         <dt>Social Sciences</dt>
                             <dd><a href="http://wheatoncollege.edu/catalog/soc_230/">SOC 230</a> Race and Ethnicity</dd>
                             <dd><a href="http://wheatoncollege.edu/catalog/wgs_315/">WGS 315</a> Black Feminist Theory</dd>
-                </dd>
-            </dl>
+                    </dl>
+                </li>
+                <li>
+                    <h3><a href="http://wheatoncollege.edu/catalog/conx_23007/">Connection 23001: African Worlds (Choose 2 or 3)</a></h3>
+                    <dl class="uk-description-list-horizontal">
+                        <dt>Creative Arts</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/musc_212/">MUSC 212</a> World Music: Africa and the Americas</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/musc_222/">MUSC 222</a> West African Mande Dance and Music</dd>
+                            <dd> </dd> 
+                        <dt>History</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/hist_143/">HIST 143</a> Africans on Africa: A Survey</dd>
+                        <dt>Humanities</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/arth_212/">ARTH 212</a> African Visual Cultures</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/arth_312/">ARTH 312</a> Resistance, Memory and Hope in African Arts</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/eng_245/">ENG 245</a> African Literature</dd>
+                        <dt>Social Sciences</dt>
+                            <dd><a href="http://wheatoncollege.edu/catalog/anth_225/">ANTH 225</a> Peoples and Cultures of Africa</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/anth_225/">ANTH 255</a>, <a href="http://wheatoncollege.edu/catalog/wgs_255/">WGS 255</a> Peoples and Cultures of Africa</dd>
+                            <dd><a href="http://wheatoncollege.edu/catalog/pols_203/">POLS 203</a> African Politics</dd>
+                    </dl>
+                </li>
+            </ul>
         </div>
     </div>
 
