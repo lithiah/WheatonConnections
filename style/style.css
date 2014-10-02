@@ -1,5 +1,5 @@
 body {
-	padding-bottom: 50px;
+	padding-bottom: 10px;
 }
 
 #mainbody {
@@ -24,10 +24,9 @@ ul, li {
 }
 
 #footer {
-   position:fixed;
-   text-align: right;
+   position:relative;
    color: transparent;
-   left:0px;
+   padding-top: 20px;
    bottom:0px;
    height:30px;
    width:100%;
