@@ -6,3 +6,15 @@ body {
 	padding: 20px;
 	padding-bottom: 0px;
 };
+
+.uk-description-list-line {
+	font-weight: 700;
+}
+
+dt {
+	font-weight: 700 !important;
+}
+
+dd {
+	color: black !important;
+}
