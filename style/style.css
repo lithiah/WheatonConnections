@@ -18,3 +18,13 @@ dt {
 dd {
 	color: black !important;
 }
+
+#footer {
+   position:fixed;
+   text-align: right;
+   color: transparent;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+}
