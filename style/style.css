@@ -19,6 +19,14 @@ dd {
 	color: black !important;
 }
 
+#connection-menu {
+	height: 30px;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
 #footer {
    position:fixed;
    text-align: right;
