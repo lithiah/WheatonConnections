@@ -1,5 +1,5 @@
 body {
-	padding-bottom: 50px;
+	padding-bottom: 10px;
 }
 
 #mainbody {
@@ -7,10 +7,27 @@ body {
 	padding-bottom: 0px;
 };
 
-#connection-menu {
-	height: 30px;
+.uk-description-list-line {
+	font-weight: 700;
+}
+
+dt {
+	font-weight: 700 !important;
+}
+
+dd {
+	color: black !important;
 }
 
 ul, li {
 	list-style-type: none;
+}
+
+#footer {
+   position:relative;
+   color: transparent;
+   padding-top: 20px;
+   bottom:0px;
+   height:30px;
+   width:100%;
 }

@@ -2,10 +2,12 @@
 <html>
 <head>
 	<title>Wheaton Connections</title>
+    
 	<link rel="stylesheet" href="style/uikit.almost-flat.min.css"/>
 	<link rel="stylesheet" href="style/style.css"/>
     <script src="style/jquery-1.11.1.min.js"></script>
     <script src="style/uikit.min.js"></script>
+    <script src="style/ourjavascript.js"></script>
 </head>
 
 <body style="background-color: #381252">
@@ -13,9 +15,12 @@
 <div id="mainbody" class="uk-grid">
 
 	<div class="uk-width-1-1">
+        <!-- title grid block that includes our header panel -->
     	<div class="uk-panel uk-panel-box uk-panel-box-primary">
-    		<div class="uk-panel-title uk-text-large"><h1>Wheaton Connections</h1></div>
-    		<div>This website allows you to browse the pre-approved connections available at Wheaton College (MA). Connections are sorted by number of courses within the connection (always either two or three), the divisions of the courses, and the major and minor departments of the courses. In addition, one specific course can be selected, and the connections that include that course will be displayed. (Only courses that are part of a connection are listed.)
+    		<div class="uk-panel-title uk-text-large"><h1 style="color: #381252;">Wheaton Connections</h1></div>
+    		<div style="color: #381252;"><p>This website allows you to browse the pre-approved connections available at Wheaton College (MA). Connections are sorted by number of courses within the connection (always either two or three), the divisions of the courses, and the major and minor departments of the courses. In addition, one specific course can be selected, and the connections that include that course will be displayed. (Only courses that are part of a connection are listed.)</p>
+
+             <!-- modal that gives site attributions -->
             <p style="text-align: right; padding-right: 10px"><a href="#credits" data-uk-modal>Credit where credit is due.</a></p>
             <div id="credits" class="uk-modal">
             <div class="uk-modal-dialog">
@@ -359,7 +364,14 @@
         </div>
     </div>
 
+    <!-- off canvas sidebar -->
+    <div id="footer"><a href="#" data-uk-offcanvas="{target:'#grids'}">UIKit deets</a></div>
+        <div id="grids" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">sdfasdfasdfasf</div>
+    </div>
+
 </div>
+
 
 
 	
