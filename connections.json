@@ -1,0 +1,14 @@
+var connections = {
+    "23007" : {
+        "Title" : "African Diaspora in New World",
+        "2course" : true,
+        "3course" : true,
+        "courses": {
+        	"CreativeArts": {"MUSC 272": "African American Originals I: Spirituals, Blues and All That Jazz", 
+        					"MUSC 273": "African American Originals II: Rhythm and Blues, Rock and Contemporary Jazz"},
+        	"History": {"HIST209": "African American History to 1877", 
+        				"HIST210": "African American History: 1877 to the Present"},
+        	"SocialSciences": {"SOC230": "Race and Ethnicity",
+        					"WGS315": "Black Feminist Theory"},
+        }
+}
