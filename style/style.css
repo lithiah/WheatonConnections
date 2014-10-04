@@ -22,12 +22,3 @@ dd {
 ul, li {
 	list-style-type: none;
 }
-
-#footer {
-   position:relative;
-   color: transparent;
-   padding-top: 20px;
-   bottom:0px;
-   height:30px;
-   width:100%;
-}
