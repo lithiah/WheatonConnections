@@ -4,8 +4,8 @@ body {
 
 #mainbody {
 	padding: 20px;
-	padding-bottom: 0px;
-};
+	padding-bottom: 0;
+}
 
 .uk-description-list-line {
 	font-weight: 700;
@@ -23,11 +23,13 @@ ul, li {
 	list-style-type: none;
 }
 
-#footer {
-   position:relative;
-   color: transparent;
-   padding-top: 20px;
-   bottom:0px;
-   height:30px;
-   width:100%;
+.pdf-viwer {
+	width: 1024px;
+	padding: 50px 100px 50px 300px;
+}
+
+iframe {
+	width: 80%;
+	vertical-align: middle;
+	height: 155%;
 }
