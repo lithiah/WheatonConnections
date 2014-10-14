@@ -36,32 +36,52 @@ def main():
         outputFile.write("]}")
 
 
-    courseNum = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9][0-9][0-9]')
-    department = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]?')
+    courseNum = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}')
+    orCourse = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}[.]* or [0-9]{3}')
+    andCourse = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}[.]* with [A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}')
     departmentList = []
     linkList = []
+    newDepartment = {}
     
     with open('graph.json', 'w') as graphFile:
         graphFile.write("{\"nodes\": [\n")
+        # Add Departments
         for i in xrange(len(descriptionList)):
             oneRow = descriptionList[i]
-            searchStart = 0
-            searchEnd = len(oneRow)
-            while (searchStart != searchEnd) :
-                newDepartment = {}
-                if courseNum.search(oneRow[searchStart:searchEnd]) != "none":
-                    matchCourse = courseNum.search(oneRow[searchStart:searchEnd])
-                    match = department.search(oneRow[matchCourse.start():searchEnd])
-                    print "match"
-
-                    oneDepartment = oneRow[match.start():match.end()]
+            if courseNum.search(oneRow):
+                matchCourse = courseNum.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneDepartment = matchCourse[j][0:(len(matchCourse[j])-4)]
                     if not oneDepartment in departmentList:
-                        print oneRow[match.start():match.end()]
                         departmentList.append(str(oneDepartment))
-                    searchStart = match.end()
-                else:
-                    print "here"
-                    searchStart = searchEnd
+
+        # Add Courses
+        for i in xrange(len(descriptionList)):
+            oneRow = descriptionList[i]
+            if courseNum.search(oneRow):
+                matchCourse = courseNum.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    if not matchCourse[j] in departmentList:
+                        departmentList.append(str(matchCourse[j]))
+
+        # Add Connections
+        for i in xrange(len(descriptionList)):
+            oneRow = descriptionList[i]
+            if orCourse.search(oneRow):
+                # print "here"
+                matchCourse = orCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j][0:(len(matchCourse[j]))]
+                    # print oneCourse
+                    if not oneCourse in departmentList:
+                        departmentList.append(str(oneCourse))
+            if andCourse.search(oneRow):
+                matchCourse = andCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j][0:(len(matchCourse[j]))]
+                    # print oneCourse
+                    if not oneCourse in departmentList:
+                        departmentList.append(str(oneCourse))
                     
         for i in xrange(len(departmentList)):
             newDepartment.update({"name":departmentList[i]})
@@ -69,9 +89,7 @@ def main():
                 
         graphFile.write("],\n\"links\": [\n")
 
-        for i in xrange(len(descriptionList)):
-            if department.match(descriptionList[i]):
-                departmentList.append(str(descriptionList[i]).replace('\'','`'))
+        for i in xrange(len(departmentList)):
             oneLink = {}
             oneLink.update({"source":i})
             graphFile.write('\t'+str(oneLink).replace('\'', '"')+'\n')
