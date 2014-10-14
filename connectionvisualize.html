@@ -11,25 +11,8 @@
     <script src="style/visualizejs.js"></script>
     <script src="style/d3.v3.min.js"></script>
 </head>
-<style>
 
-<<<<<<< HEAD
 <body style="background-color: #381252">
-=======
-.link {
-  stroke: #ccc;
-}
-
-.node text {
-  pointer-events: none;
-  font: 20px sans-serif;
-}
-
-</style>
-
-<body style="background-color: #FFFFFF">
-
->>>>>>> FETCH_HEAD
 <div id="mainbody" class="uk-grid">
     
     <div class="uk-width-1-4">
@@ -65,7 +48,6 @@
     </div>        
 </div>
 
-<<<<<<< HEAD
 <div id="mainbody2" class="uk-grid">
     <div id="uk-width-1-1">
         <div id="svgbody"></div>
@@ -73,66 +55,6 @@
 </div>
 
 
-=======
-<div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
-var width = 960,
-    height = 500
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-var force = d3.layout.force()
-    .gravity(.05)
-    .distance(100)
-    .charge(-100)
-    .size([width, height]);
-
-d3.json("graph.json", function(error, json) {
-  force
-      .connections(json.connections)
-      .links(json.links)
-      .start();
-
-  var link = svg.selectAll(".link")
-      .data(json.links)
-    .enter().append("line")
-      .attr("class", "link");
-
-  var node = svg.selectAll(".node")
-      .data(json.connections)
-    .enter().append("g")
-      .attr("class", "node")
-      .call(force.drag);
-
-  node.append("image")
-      .attr("xlink:href", "https://github.com/favicon.ico")
-      .attr("x", -8)
-      .attr("y", -8)
-      .attr("width", 16)
-      .attr("height", 16);
-
-  node.append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
-      .text(function(d) { return d.nodes });
-
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  });
-});
-
-</script>
-</div>
->>>>>>> FETCH_HEAD
 
 </body>
 </html>
