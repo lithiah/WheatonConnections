@@ -24,21 +24,11 @@ def main():
         if connectionNames.match(content):
             nameList.append(str(content).replace('\'','`'))
         if descriptions.match(content):
-            descriptionList.append(str(content).replace('\'','`'))
+            descriptionList.append(str(content).replace('\'','`').replace('\n', ' '))
 
-    with open('connections.json', 'w') as outputFile:
-        outputFile.write("{\"connections\": [\n")
-        for i in xrange(len(nameList)):
-            oneConnection = {}
-            oneConnection.update({"nodes":nameList[i]})
-            oneConnection.update({"CourseDescription":descriptionList[i]})
-            outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
-        outputFile.write("]}")
-
-
-    courseNum = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}')
-    orCourse = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}[.]* or [0-9]{3}')
-    andCourse = re.compile(r'[A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}[.]* with [A-Z][A-Z][A-Z]?[A-Z]? [0-9]{3}')
+    courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
+    orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
+    andCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!or).)* with ([A-Z]{2,4} [0-9]{3})(?:(?!or).)*')
     departmentList = []
     linkList = []
     newDepartment = {}
@@ -57,43 +47,90 @@ def main():
 
         # Add Courses
         for i in xrange(len(descriptionList)):
-            oneRow = descriptionList[i]
+            oneRow = descriptionList[i].replace('\n', ' ')
             if courseNum.search(oneRow):
                 matchCourse = courseNum.findall(oneRow)
                 for j in xrange(len(matchCourse)):
                     if not matchCourse[j] in departmentList:
                         departmentList.append(str(matchCourse[j]))
 
-        # Add Connections
-        for i in xrange(len(descriptionList)):
-            oneRow = descriptionList[i]
-            if orCourse.search(oneRow):
-                # print "here"
-                matchCourse = orCourse.findall(oneRow)
-                for j in xrange(len(matchCourse)):
-                    oneCourse = matchCourse[j][0:(len(matchCourse[j]))]
-                    # print oneCourse
-                    if not oneCourse in departmentList:
-                        departmentList.append(str(oneCourse))
-            if andCourse.search(oneRow):
-                matchCourse = andCourse.findall(oneRow)
-                for j in xrange(len(matchCourse)):
-                    oneCourse = matchCourse[j][0:(len(matchCourse[j]))]
-                    # print oneCourse
-                    if not oneCourse in departmentList:
-                        departmentList.append(str(oneCourse))
-                    
         for i in xrange(len(departmentList)):
             newDepartment.update({"name":departmentList[i]})
-            graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
-                
+            if (i != len(departmentList)-1):
+                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+','+'\n')
+            else:
+                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
+
+        # Add Connections
+        connectionList = []
+        for i in xrange(len(descriptionList)):
+            oneRow = descriptionList[i].replace('\n', ' ')
+            if orCourse.search(oneRow):
+                groupOne = []
+                groupTwo = []
+                count = 0
+                matchCourse = orCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j]
+                    if not oneCourse in connectionList:
+                        count+=1
+
+                        if count <= (len(matchCourse) / 2):
+                            if oneCourse[0] != '':
+                                groupOne.append(str(oneCourse[0]))
+                                groupOne.append(str(oneCourse[1]))
+                            else:
+                                groupOne.append(str(oneCourse[2]))
+                                groupOne.append(str(oneCourse[3]))
+                        else:
+                            if oneCourse[0] != '':
+                                groupTwo.append(str(oneCourse[0]))
+                                groupTwo.append(str(oneCourse[1]))
+                            else:
+                                groupTwo.append(str(oneCourse[2]))
+                                groupTwo.append(str(oneCourse[3]))
+
+                for j in xrange(len(groupOne)):
+                    for k in xrange(len(groupTwo)):
+                        tempList = []
+                        tempList.append(groupOne[j])
+                        tempList.append(groupTwo[k])
+                        connectionList.append(tempList)
+
+            elif andCourse.search(oneRow):
+                matchCourse = andCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j]
+                    if not oneCourse in connectionList:
+                        tempList = []
+                        tempList.append(oneCourse[0])
+                        tempList.append(oneCourse[1])
+                        connectionList.append(tempList)
+
         graphFile.write("],\n\"links\": [\n")
 
-        for i in xrange(len(departmentList)):
+        for i in xrange(len(connectionList)):
             oneLink = {}
-            oneLink.update({"source":i})
-            graphFile.write('\t'+str(oneLink).replace('\'', '"')+'\n')
+            sourceLocation = departmentList.index(connectionList[i][0])
+            targetLocation = departmentList.index(connectionList[i][1])
+            oneLink.update({"source":sourceLocation})
+            oneLink.update({"target":targetLocation})
+            if (i != len(connectionList)-1):
+                graphFile.write('\t'+str(oneLink).replace('\'', '"')+','+'\n')
+            else:
+                graphFile.write('\t'+str(oneLink).replace('\'', '"')+'\n')
+
         graphFile.write("]}")
+
+        with open('connections.json', 'w') as outputFile:
+            outputFile.write("{\"ConnectionDescriptions\": [\n")
+            for i in xrange(len(nameList)):
+                oneConnection = {}
+                oneConnection.update({"CourseName":nameList[i]})
+                oneConnection.update({"CourseDescription":descriptionList[i]})
+                outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
+            outputFile.write("],\n\"Connections\": [\n")
+            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]}')
     
 if __name__ == '__main__':
     main()
