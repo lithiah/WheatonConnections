@@ -8,6 +8,8 @@
     <script src="style/jquery-1.11.1.min.js"></script>
     <script src="style/uikit.min.js"></script>
     <script src="style/ourjavascript.js"></script>
+    <script src="style/visualizejs.js"></script>
+    <script src="style/d3.v3.min.js"></script>
 </head>
 <style>
 
@@ -28,6 +30,7 @@
 </style>
 
 <body style="background-color: #FFFFFF">
+
 
 <div id="mainbody" class="uk-grid">
     
@@ -61,8 +64,14 @@
             <h3>Student-Initiated Connections</h3>
         </div>
         </a>
-    </div> 
-       
+    </div>        
+</div>
+
+
+<div id="mainbody2" class="uk-grid">
+    <div id="uk-width-1-1">
+        <div id="svgbody"></div>
+    </div>
 </div>
 
 <div id="d3graph">
@@ -130,6 +139,7 @@ d3.json("graph.json", function(error, json) {
 
 </script>
 </div>
+
 
 </body>
 </html>
