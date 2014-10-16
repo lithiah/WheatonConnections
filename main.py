@@ -45,6 +45,8 @@ def main():
                     if not oneDepartment in departmentList:
                         departmentList.append(str(oneDepartment))
 
+        connectionList = []
+
         # Add Courses
         for i in xrange(len(descriptionList)):
             oneRow = descriptionList[i].replace('\n', ' ')
@@ -54,6 +56,11 @@ def main():
                     if not matchCourse[j] in departmentList:
                         departmentList.append(str(matchCourse[j]))
 
+                        tempList = []
+                        tempList.append(str(matchCourse[j][0:(len(matchCourse[j])-4)]))
+                        tempList.append(str(matchCourse[j]))
+                        connectionList.append(tempList)
+
         for i in xrange(len(departmentList)):
             newDepartment.update({"name":departmentList[i]})
             if (i != len(departmentList)-1):
@@ -62,7 +69,7 @@ def main():
                 graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
 
         # Add Connections
-        connectionList = []
+        
         for i in xrange(len(descriptionList)):
             oneRow = descriptionList[i].replace('\n', ' ')
             if orCourse.search(oneRow):
