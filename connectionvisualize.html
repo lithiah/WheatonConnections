@@ -17,7 +17,7 @@
 }
 
 .node text {
-  font: 13px Helvetica;
+  font: 10px Helvetica;
   pointer-events: none;
   text-anchor: middle;
 }
@@ -773,8 +773,15 @@ var data = {"nodes": [
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  });
+    node.on("mouseover", function (d) {
+            d3.select(this).select('text').style('font-size', '20px');
+        })
+        .on("mouseout", function(d) {
+            d3.select(this).select('text').style('font-size', '10px');
+        })
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+});
 
 
 </script>
