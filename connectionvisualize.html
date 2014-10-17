@@ -5,6 +5,7 @@
     
     <link rel="stylesheet" href="style/uikit.almost-flat.min.css"/>
     <link rel="stylesheet" href="style/style.css"/>
+    <script src="style/jquery-1.11.1.min.js"></script>
     <script src="style/uikit.min.js"></script>
     <script src="style/ourjavascript.js"></script>
     <script src="style/visualizejs.js"></script>
@@ -12,11 +13,11 @@
 <style>
 
 .link {
-  stroke: #660099;
+  stroke: #0099FF;
 }
 
 .node text {
-  font: 10px Helvetica;
+  font: 11px Helvetica;
   pointer-events: none;
 }
 
@@ -112,11 +113,19 @@ $.ajax(
     .attr("class", "node")
     .call(force.drag);           
     node.append("circle")
-    .attr("r", function(d) { return Math.sqrt(d.size) / 20 || 4.5; })        
+    .attr("r", function(d) { 
+      if (d.name.length <=4) {
+        return 6.5; 
+      }else
+        return 4.5; 
+    })        
     node.select("circle")
     .style("fill", color);           
     function color(d) {
-      return "#fd8d3c"; // leaf node
+      if (d.name.length <=4) {
+        return "#FF0000"
+      }else
+        return "#FFCC00"; // leaf node
     }
 
     node.append("text")
