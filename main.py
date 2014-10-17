@@ -55,21 +55,12 @@ def main():
                 for j in xrange(len(matchCourse)):
                     if not matchCourse[j] in departmentList:
                         departmentList.append(str(matchCourse[j]))
-
                         tempList = []
                         tempList.append(str(matchCourse[j][0:(len(matchCourse[j])-4)]))
                         tempList.append(str(matchCourse[j]))
                         connectionList.append(tempList)
 
-        for i in xrange(len(departmentList)):
-            newDepartment.update({"name":departmentList[i]})
-            if (i != len(departmentList)-1):
-                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+','+'\n')
-            else:
-                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
-
         # Add Connections
-        
         for i in xrange(len(descriptionList)):
             oneRow = descriptionList[i].replace('\n', ' ')
             if orCourse.search(oneRow):
@@ -83,19 +74,21 @@ def main():
                         count+=1
 
                         if count <= (len(matchCourse) / 2):
-                            if oneCourse[0] != '':
-                                groupOne.append(str(oneCourse[0]))
-                                groupOne.append(str(oneCourse[1]))
-                            else:
-                                groupOne.append(str(oneCourse[2]))
-                                groupOne.append(str(oneCourse[3]))
+                            someGroup = groupOne
                         else:
-                            if oneCourse[0] != '':
-                                groupTwo.append(str(oneCourse[0]))
-                                groupTwo.append(str(oneCourse[1]))
-                            else:
-                                groupTwo.append(str(oneCourse[2]))
-                                groupTwo.append(str(oneCourse[3]))
+                            someGroup = groupTwo
+                        
+                        if oneCourse[0] != '':
+                            someGroup.append(str(oneCourse[0]))
+                            someGroup.append(str(oneCourse[1]))
+                        else:
+                            someGroup.append(str(oneCourse[2]))
+                            someGroup.append(str(oneCourse[2][0:(len(oneCourse[2])-4)])+' '+str(oneCourse[3]))
+                            departmentList.append(str(oneCourse[2][0:(len(oneCourse[2])-4)])+' '+str(oneCourse[3]))
+                            tempList = []
+                            tempList.append(str(oneCourse[2][0:(len(oneCourse[2])-4)])+' '+str(oneCourse[3]))
+                            tempList.append(str(oneCourse[2][0:(len(oneCourse[2])-4)]))
+                            connectionList.append(tempList)
 
                 for j in xrange(len(groupOne)):
                     for k in xrange(len(groupTwo)):
@@ -113,6 +106,13 @@ def main():
                         tempList.append(oneCourse[0])
                         tempList.append(oneCourse[1])
                         connectionList.append(tempList)
+
+        for i in xrange(len(departmentList)):
+            newDepartment.update({"name":departmentList[i]})
+            if (i != len(departmentList)-1):
+                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+','+'\n')
+            else:
+                graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
 
         graphFile.write("],\n\"links\": [\n")
 

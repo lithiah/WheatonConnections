@@ -295,7 +295,8 @@
 	{"name": "MATH 133"},
 	{"name": "SYCH 251"},
 	{"name": "RUSS 200"},
-	{"name": "RUSS 201"}
+	{"name": "RUSS 201"},
+	{"name": "GER 202"}
 ],
 "links": [
 	{"source": 0, "target": 36},
@@ -564,6 +565,7 @@
 	{"source": 37, "target": 38},
 	{"source": 37, "target": 39},
 	{"source": 48, "target": 49},
+	{"source": 297, "target": 8},
 	{"source": 52, "target": 53},
 	{"source": 58, "target": 36},
 	{"source": 59, "target": 60},

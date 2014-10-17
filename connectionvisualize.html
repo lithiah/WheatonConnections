@@ -17,7 +17,6 @@
 .node text {
   font: 10px Helvetica;
   pointer-events: none;
-  text-anchor: middle;
 }
 
 #d3graph {
@@ -64,13 +63,6 @@
     </div>        
 </div>
 
-
-<!-- <div id="mainbody2" class="uk-grid">
-    <div id="uk-width-1-1">
-        <div id="svgbody"></div>
-    </div>
-</div> -->
-
 <div id="d3graph" style="width=100%; height=100%;">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
@@ -94,79 +86,62 @@ var force = d3.layout.force()
     .size([width, height]);   
 
 $.ajax(
-        {
-            type: 'GET',
-            url: 'graph.json',
-            data: "{}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: false,
-            success: function(data) {
-                console.log(data);
-                console.log(JSON.parse(JSON.stringify(data)));
+{      
+  type: 'GET',
+  url: 'graph.json',
+  data: "{}",
+  contentType: "application/json; charset=utf-8",
+  dataType: "json",
+  async: false,
+  success: function(data) {   
+    console.log(data);
+    console.log(JSON.parse(JSON.stringify(data)));
+    force
+    .nodes(data.nodes)
+    .links(data.links)
+    .start();         
 
-                force
-                  .nodes(data.nodes)
-                  .links(data.links)
-                  .start();         
+    var link = svg.selectAll(".link")
+    .data(data.links)
+    .enter().append("line")           
+    .attr("class", "link");          
+    var node = svg.selectAll(".node")
+    .data(data.nodes)
+    .enter().append("g")
+    .attr("class", "node")
+    .call(force.drag);           
+    node.append("circle")
+    .attr("r", function(d) { return Math.sqrt(d.size) / 20 || 4.5; })        
+    node.select("circle")
+    .style("fill", color);           
+    function color(d) {
+      return "#fd8d3c"; // leaf node
+    }
 
-              var link = svg.selectAll(".link")
-                  .data(data.links)
-                .enter().append("line")
-                  .attr("class", "link");           
+    node.append("text")
+      .attr("dy", ".05em")
+      .text(function(d) { return d.name; });            
 
-              var node = svg.selectAll(".node")
-                  .data(data.nodes)
-                .enter().append("g")
-                  .attr("class", "node")
-                  .call(force.drag);            
+    force.on("tick", function() {
+      link.attr("x1", function(d) { return d.source.x; })          
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });            
 
-              node.append("circle")
-                  .attr("r", function(d) { return Math.sqrt(d.size) / 20 || 4.5; })         
+      node.on("mouseover", function (d) {
+        d3.select(this).select('text').style('font-size', '20px');
+      })
+      .on("mouseout", function(d) {
+        d3.select(this).select('text').style('font-size', '10px');
+      })
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    });
+  },
 
-              node.select("circle")
-                  .style("fill", color);            
-
-              function color(d) {
-              return d._children ? "#3182bd" // collapsed package
-                  : d.children ? "#c6dbef" // expanded package
-                  : "#fd8d3c"; // leaf node
-            }           
-
-              node.append("text")
-                  .attr("dy", ".05em")
-                  .text(function(d) { return d.name; });            
-
-              force.on("tick", function() {
-                link.attr("x1", function(d) { return d.source.x; })
-                    .attr("y1", function(d) { return d.source.y; })
-                    .attr("x2", function(d) { return d.target.x; })
-                    .attr("y2", function(d) { return d.target.y; });            
-
-                node.on("mouseover", function (d) {
-                        d3.select(this).select('text').style('font-size', '20px');
-                    })
-                    .on("mouseout", function(d) {
-                        d3.select(this).select('text').style('font-size', '10px');
-                    })
-                    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });           
-
-             });
-
-            },
-            error: function(xhr, status) {
-                alert("hatada:" + xhr.responseXML);
-            },
-            onComplete: function(data) {
-
-            } 
-
+  error: function(xhr, status) {
+    alert("hatada:" + xhr.responseXML);
+  },
 }); //ajax
-  
-
-
-    
-
 
 </script>
 </div>
