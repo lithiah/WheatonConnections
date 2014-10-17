@@ -2,13 +2,12 @@
 <html>
 <head>
     <title>Wheaton Connections</title>
-    
+    <script src="style/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style/uikit.almost-flat.min.css"/>
     <link rel="stylesheet" href="style/style.css"/>
     <script src="style/jquery-1.11.1.min.js"></script>
     <script src="style/uikit.min.js"></script>
     <script src="style/ourjavascript.js"></script>
-    <script src="style/visualizejs.js"></script>
 </head>
 <style>
 
@@ -85,7 +84,7 @@ var force = d3.layout.force()
     .friction(0.9)
     .theta(0.8)
     .alpha(0.5)
-    .size([width, height]);  
+    .size([width, height]);   
 
 $.ajax(
 {      
