@@ -31,20 +31,33 @@ iframe {
 
 /* mouse over link */
 a:hover {
-    color: red;
+    color: #0000FF;
     text-decoration: none;
 }
 
-.pdf-viwer {
-	width: 1024px;
-	padding: 50px 100px 50px 300px;
+.menu {
+	text-align: center; 
+	background-color: #008cba;
+	color: red;
 }
 
-.content {
-	padding: 50px 100px 0 300px;
+.menu:hover {
+	background-color: #007095;
+}
+
+#content {
+	width: 70%;
+	padding-top: 50px;
+	padding-left: 15%;
+	padding-right: 15%;
+	text-align: center;
 	font-size: 20px;
 }
 
+#pdf-viwer {
+	margin: 50px 10%;
+	width: 100%;
+}
 
 #download {
 	margin-right: 100px;
