@@ -29,25 +29,11 @@ iframe {
 	height: 155%;
 }
 
-a:link {
-    color: #0066FF;
-}
-
-/* visited link */
-a:visited {
-    color: #0066FF;
-}
-
 /* mouse over link */
 a:hover {
     color: red;
+    text-decoration: none;
 }
-
-/* selected link */
-a:active {
-    color: #0000FF;
-}
-
 
 .pdf-viwer {
 	width: 1024px;
@@ -63,3 +49,8 @@ a:active {
 #download {
 	margin-right: 100px;
 }
+
+h3 {
+	color: white;
+}
+
