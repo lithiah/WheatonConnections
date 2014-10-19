@@ -66,3 +66,18 @@ h3 {
 	color: white;
 }
 
+
+.hint {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    background-color: #008cba;
+    color: #FFF;
+    text-align: center;
+    font-size: 25px;
+    padding: 5px;
+    z-index: 100;
+    opacity: 1;
+}
+

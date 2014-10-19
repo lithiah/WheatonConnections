@@ -29,6 +29,8 @@ def main():
     courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
     orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
     andCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!or).)* with ([A-Z]{2,4} [0-9]{3})(?:(?!or).)*')
+    orAndCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(.*) or ([A-Z]{2,4} [0-9]{3})(.*) with ([A-Z]{2,4} [0-9]{3})(?:(?!or).)*')
+    andOrCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(.*) with ([A-Z]{2,4} [0-9]{3})(.*) or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*')
     departmentList = []
     linkList = []
     newDepartment = {}
@@ -106,6 +108,36 @@ def main():
                         tempList.append(oneCourse[0])
                         tempList.append(oneCourse[1])
                         connectionList.append(tempList)
+
+            if andOrCourse.search(oneRow):
+                matchCourse = andOrCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j]
+                    tempListOne = []
+                    tempListOne.append(oneCourse[0])
+                    tempListOne.append(oneCourse[2])
+                    if not tempListOne in connectionList:
+                        connectionList.append(tempListOne)
+                    tempListTwo = []
+                    tempListTwo.append(oneCourse[0])
+                    tempListTwo.append(oneCourse[4])
+                    if not tempListTwo in connectionList:
+                        connectionList.append(tempListTwo)
+
+            if orAndCourse.search(oneRow):
+                matchCourse = orAndCourse.findall(oneRow)
+                for j in xrange(len(matchCourse)):
+                    oneCourse = matchCourse[j]
+                    tempListOne = []
+                    tempListOne.append(oneCourse[0])
+                    tempListOne.append(oneCourse[4])
+                    if not tempListOne in connectionList:
+                        connectionList.append(tempListOne)
+                    tempListTwo = []
+                    tempListTwo.append(oneCourse[2])
+                    tempListTwo.append(oneCourse[4])
+                    if not tempListTwo in connectionList:
+                        connectionList.append(tempListTwo)
 
         for i in xrange(len(departmentList)):
             newDepartment.update({"name":departmentList[i]})
