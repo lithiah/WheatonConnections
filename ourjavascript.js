@@ -16,16 +16,22 @@ $(document).ready(function() {
 
 			$.each(connections, function() {
 
-				var D = this["CourseDescription"];
-				var N = this["CourseName"];
+				var Description = this["CourseDescription"];
+				var Name = this["CourseName"];
+				var Three = this["Three"];
+				var Natural = this["Natural"];
+				var Social = this["Social"];
+				var Humanities = this["Humanities"];
+
 				var end = D.length - 43;
 
 				currentText = $("#jsonfill").html();
 
-				$("#jsonfill").html(currentText + "<div id='con" + i + "' <br>" + N + "<br>" + D.substring(0, end) + "</div>");
+				$("#jsonfill").html(currentText + "<div id='con" + i + "' <br>" + Name + "<br>" + Description.substring(0, end) + "</div>");
+								
 				
-				i = i + 1;
 
+				i = i + 1;
 			});
 
 			$('.uk-form').change(function(){
