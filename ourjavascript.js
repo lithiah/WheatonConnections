@@ -23,13 +23,18 @@ $(document).ready(function() {
 				var Social = this["Social"];
 				var Humanities = this["Humanities"];
 
-				var end = D.length - 43;
+				var end = Description.length - 43;
 
 				currentText = $("#jsonfill").html();
 
 				$("#jsonfill").html(currentText + "<div id='con" + i + "' <br>" + Name + "<br>" + Description.substring(0, end) + "</div>");
 								
-				
+				var newdiv = "#con" + i
+
+				console.console.log(Three);
+				if (Three == "True") {
+					$("newdiv").addClass("three");
+				};
 
 				i = i + 1;
 			});
