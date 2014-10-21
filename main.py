@@ -203,12 +203,12 @@ def main():
                 outputFile.write('\t'+"\"Natural\": \""+str(oneConnection["Natural"]).replace('\'', '"')+"\","+'\n')
                 outputFile.write('\t'+"\"Social\": \""+str(oneConnection["Social"]).replace('\'', '"')+"\","+'\n')
 
-                if (i!= len(nameList)-1):
+
+                if (i!= len(humanitiesList)-2):
                     outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"},\n\n")
                 else:
                     outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"}"+'\n')
                     
-
             outputFile.write("]}")
 
 if __name__ == '__main__':
