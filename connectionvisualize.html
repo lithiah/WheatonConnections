@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style/style.css"/>
     <script src="style/jquery-1.11.1.min.js"></script>
     <script src="style/uikit.min.js"></script>
-    <script src="style/ourjavascript.js"></script>
 </head>
 <style>
 
@@ -66,36 +65,37 @@
 </div>
 
 <div class="hint">
-    <p>Press CTRL/CMD + F to Search</p>
-    <script>
-if ("ontouchstart" in document.documentElement) { 
-    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
-}
-</script>
+  <p>Press CTRL/CMD + F to Search</p>
+  <script>
+    if ("ontouchstart" in document.documentElement) { 
+      document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+  </script>
 </div>
 
-<div id="d3graph" style="width=100%; height=100%;">
+<div id="d3graph" style="width=100%; height=100%; margin=10px;">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
 
-var width = 1400,
+var width1 = "100%",
+    width2 = 1200,
     height = 1300,
     root;
 
 var svg = d3.select("#d3graph").append("svg")
     .attr({
-      "width": '100%',
+      "width": width1,
       "height": height
     });
 
 var force = d3.layout.force()
-    .gravity(.05)
+    .gravity(.06)
     .distance(100)
     .charge(-75)
     .friction(0.9)
     .theta(0.9)
     .alpha(0.5)
-    .size([width, height]);   
+    .size([width2, height]);   
 
 $.ajax(
 {      
