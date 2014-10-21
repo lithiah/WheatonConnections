@@ -35,21 +35,21 @@ def main():
 
     for i in range(len(descriptionList)):
         if three.match(descriptionList[i]):
-            threeList.append(True)
+            threeList.append("True")
         else:
-            threeList.append(False)
+            threeList.append("False")
         if natural.match(descriptionList[i]):
-            naturalList.append(True)
+            naturalList.append("True")
         else:
-            naturalList.append(False)
+            naturalList.append("False")
         if social.match(descriptionList[i]):
-            socialList.append(True)
+            socialList.append("True")
         else:
-            socialList.append(False)
+            socialList.append("False")
         if humanities.match(descriptionList[i]):
-            humanitiesList.append(True)
+            humanitiesList.append("True")
         else:
-            humanitiesList.append(False)
+            humanitiesList.append("False")
 
     courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
     orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
