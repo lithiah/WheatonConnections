@@ -169,7 +169,7 @@ def main():
                 oneConnection.update({"CourseDescription":descriptionList[i]})
                 outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
             outputFile.write("],\n\"Connections\": [\n")
-            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]}')
+            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]},')
     
 if __name__ == '__main__':
     main()
