@@ -163,13 +163,18 @@ def main():
 
         with open('connections.json', 'w') as outputFile:
             outputFile.write("{\"ConnectionDescriptions\": [\n")
-            for i in xrange(len(nameList)):
+            for i in xrange(len(nameList)-1):
                 oneConnection = {}
                 oneConnection.update({"CourseName":nameList[i]})
                 oneConnection.update({"CourseDescription":descriptionList[i]})
-                outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
+                outputFile.write('\t'+str(oneConnection).replace('\'', '"')+',\n')
+            oneConnection = {}
+            oneConnection.update({"CourseName":nameList[-1]})
+            oneConnection.update({"CourseDescription":descriptionList[-1]})
+            outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
+
             outputFile.write("],\n\"Connections\": [\n")
-            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]},')
+            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]}')
     
 if __name__ == '__main__':
     main()
