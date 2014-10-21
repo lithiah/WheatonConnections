@@ -11,11 +11,18 @@ def main():
     doc = BeautifulSoup(r.content.decode('utf-8'))
     doc.prettify().encode('utf-8')
 
-
     connectionNames = re.compile(r'CONX [0-9][0-9][0-9][0-9][0-9]')
     descriptions = re.compile(r'[A-Z][a-z][a-z][a-z]?[a-z]? |(or three) course connection')
+    three = re.compile(r'.*(three).*')
+    natural = re.compile(r'.*(BIO).* |.*(PHYS).* |.*(CHEM).* |.*(PHYS).* |.*(AST).*')
+    social = re.compile(r'.*(PSY).* |.*(POLS).* |.*(PHIL).* |.*(ECON).* |.*(HIST).* |.*(SOC).* |.*(ANTH).* |.*(REL).*')
+    humanities = re.compile(r'.*(ENG).* ')
     nameList = []
     descriptionList = []
+    threeList = []
+    naturalList = []
+    socialList = []
+    humanitiesList = []
     rows = doc.find_all('tr')
 
     for i in range(len(rows)):
@@ -25,6 +32,24 @@ def main():
             nameList.append(str(content).replace('\'','`'))
         if descriptions.match(content):
             descriptionList.append(str(content).replace('\'','`').replace('\n', ' '))
+
+    for i in range(len(descriptionList)):
+        if three.match(descriptionList[i]):
+            threeList.append(True)
+        else:
+            threeList.append(False)
+        if natural.match(descriptionList[i]):
+            naturalList.append(True)
+        else:
+            naturalList.append(False)
+        if social.match(descriptionList[i]):
+            socialList.append(True)
+        else:
+            socialList.append(False)
+        if humanities.match(descriptionList[i]):
+            humanitiesList.append(True)
+        else:
+            humanitiesList.append(False)
 
     courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
     orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
@@ -163,20 +188,28 @@ def main():
 
         with open('connections.json', 'w') as outputFile:
             outputFile.write("{\"ConnectionDescriptions\": [\n")
-            for i in xrange(len(nameList)):
+            for i in xrange(len(nameList)-1):
                 oneConnection = {}
                 oneConnection.update({"CourseName":nameList[i]})
                 oneConnection.update({"CourseDescription":descriptionList[i]})
+                oneConnection.update({"Three":threeList[i]})
+                oneConnection.update({"Natural":naturalList[i]})
+                oneConnection.update({"Social":socialList[i]})
+                oneConnection.update({"Humanities":humanitiesList[i]})
+                
+                outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Three\": \""+str(oneConnection["Three"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Natural\": \""+str(oneConnection["Natural"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Social\": \""+str(oneConnection["Social"]).replace('\'', '"')+"\","+'\n')
+
                 if (i!= len(nameList)-1):
-                    outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
-                    outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\"},\n\n")
+                    outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"},\n\n")
                 else:
-                    outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
-                    outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\"}"+'\n')
+                    outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"}"+'\n')
                     
 
             outputFile.write("]}")
 
-    
 if __name__ == '__main__':
     main()
