@@ -196,20 +196,20 @@ def main():
                 oneConnection.update({"Natural":naturalList[i]})
                 oneConnection.update({"Social":socialList[i]})
                 oneConnection.update({"Humanities":humanitiesList[i]})
-                outputFile.write('\t'+str(oneConnection).replace('\'', '"')+',\n')
-            oneConnection = {}
-            oneConnection.update({"CourseName":nameList[-1]})
-            oneConnection.update({"CourseDescription":descriptionList[-1]})
-            oneConnection.update({"Three":threeList[i]})
-            oneConnection.update({"Natural":naturalList[i]})
-            oneConnection.update({"Social":socialList[i]})
-            oneConnection.update({"Humanities":humanitiesList[i]})
-            outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
+                
+                outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Three\": \""+str(oneConnection["Three"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Natural\": \""+str(oneConnection["Natural"]).replace('\'', '"')+"\","+'\n')
+                outputFile.write('\t'+"\"Social\": \""+str(oneConnection["Social"]).replace('\'', '"')+"\","+'\n')
 
-            outputFile.write("],\n\"Connections\": [\n")
-            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]}')
-    
-    print nameList;
+                if (i!= len(nameList)-1):
+                    outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"},\n\n")
+                else:
+                    outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"}"+'\n')
+                    
+
+            outputFile.write("]}")
 
 if __name__ == '__main__':
     main()
