@@ -167,9 +167,16 @@ def main():
                 oneConnection = {}
                 oneConnection.update({"CourseName":nameList[i]})
                 oneConnection.update({"CourseDescription":descriptionList[i]})
-                outputFile.write('\t'+str(oneConnection).replace('\'', '"')+'\n')
-            outputFile.write("],\n\"Connections\": [\n")
-            outputFile.write('\t'+str(connectionList).replace('\'', '"')+'\n]}')
+                if (i!= len(nameList)-1):
+                    outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
+                    outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\"},\n\n")
+                else:
+                    outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
+                    outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\"}"+'\n')
+                    
+
+            outputFile.write("]}")
+
     
 if __name__ == '__main__':
     main()
