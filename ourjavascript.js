@@ -22,6 +22,7 @@ $(document).ready(function() {
 				var Natural = this["Natural"];
 				var Social = this["Social"];
 				var Humanities = this["Humanities"];
+				var QA = this["QA"];
 
 				var end = Description.length - 43;
 
@@ -44,6 +45,9 @@ $(document).ready(function() {
 				};
 				if (Humanities == "True") {
 					$(newdiv).addClass("humanities");
+				};
+				if (QA == "True") {
+					$(newdiv).addClass("qa");
 				};
 
 				i = i + 1;
@@ -99,6 +103,12 @@ $(document).ready(function() {
 		else {
 			$('.humanities').hide();
 		}	
+		if ($('#qa').is(":checked")) {
+			$('.qa').show();
+		}
+		else {
+			$('.qa').hide();
+		}
 
     				
   	});

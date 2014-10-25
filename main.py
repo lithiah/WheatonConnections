@@ -14,15 +14,17 @@ def main():
     connectionNames = re.compile(r'CONX [0-9][0-9][0-9][0-9][0-9]')
     descriptions = re.compile(r'[A-Z][a-z][a-z][a-z]?[a-z]? |(or three) course connection')
     three = re.compile(r'.*(three).*')
-    natural = re.compile(r'.*(BIO).* |.*(PHYS).* |.*(CHEM).* |.*(PHYS).* |.*(AST).*')
-    social = re.compile(r'.*(PSY).* |.*(POLS).* |.*(PHIL).* |.*(ECON).* |.*(HIST).* |.*(SOC).* |.*(ANTH).* |.*(REL).*')
-    humanities = re.compile(r'.*(ENG).* ')
+    natural = re.compile(r'.*(BIO).* |.*(CHEM).* |.*(PHYS).* |.*(AST).* |.*(PSY).* |.*(INT).*')
+    social = re.compile(r'.*(AFDS).* |.*(ECON).* |.*(ANTH).* |.*(EDUC).*|.*(FNMS).* |.*(INT).* |.*(MGMT).* |.*(POLS).* |.*(PSY).* |.*(SOC).* |.*(WGS).* |.*(WMST).*')
+    humanities = re.compile(r'.*(ENG).* |.*(ARTH).* |.*(ARTS).* |.*(CLAS).* |.*(CW).* |.*(GER).* |.*(GK).* |.*(HISP).* |.*(HIST).* |.*(ITAS).* |.*(LAT).* |.*(MUSC).* |.*(PHIL).* |.*(REL).* |.*(RUSS).* |.*(THEA).* |.*(WGS).* |.*(ANTH).* |.*(FNMS).* |.*(FR).* |.*(WMST).*')
+    qa = re.compile(r'.*(MATH).*')
     nameList = []
     descriptionList = []
     threeList = []
     naturalList = []
     socialList = []
     humanitiesList = []
+    qaList = []
     rows = doc.find_all('tr')
 
     for i in range(len(rows)):
@@ -50,6 +52,10 @@ def main():
             humanitiesList.append("True")
         else:
             humanitiesList.append("False")
+        if qa.match(descriptionList[i]):
+            qaList.append("True")
+        else:
+            qaList.append("False")
 
     courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
     orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
@@ -196,13 +202,14 @@ def main():
                 oneConnection.update({"Natural":naturalList[i]})
                 oneConnection.update({"Social":socialList[i]})
                 oneConnection.update({"Humanities":humanitiesList[i]})
+                oneConnection.update({"QA":qaList[i]})
                 
                 outputFile.write('\t'+"{\"CourseName\": \""+str(oneConnection["CourseName"]).replace('\'', '"')+"\","+'\n')
                 outputFile.write('\t'+"\"CourseDescription\": \""+str(oneConnection["CourseDescription"]).replace('\'', '"')+"\","+'\n')
                 outputFile.write('\t'+"\"Three\": \""+str(oneConnection["Three"]).replace('\'', '"')+"\","+'\n')
                 outputFile.write('\t'+"\"Natural\": \""+str(oneConnection["Natural"]).replace('\'', '"')+"\","+'\n')
                 outputFile.write('\t'+"\"Social\": \""+str(oneConnection["Social"]).replace('\'', '"')+"\","+'\n')
-
+                outputFile.write('\t'+"\"QA\": \""+str(oneConnection["QA"]).replace('\'', '"')+"\","+'\n')
 
                 if (i!= len(humanitiesList)-2):
                     outputFile.write('\t'+"\"Humanities\": \""+str(oneConnection["Humanities"]).replace('\'', '"')+"\"},\n\n")
