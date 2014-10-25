@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup 
 
 def main():
+    # scrapes data from wheaton website, formats it, and writes it to json 
     data = {'submit_btn' : 'Search Catalog', 'schedule_beginterm':'201510', 'subject_cat':'CONX'}
     url = 'https://weblprod1.wheatonma.edu/PROD/bzcrschd.P_OpenDoor'
 
@@ -11,6 +12,7 @@ def main():
     doc = BeautifulSoup(r.content.decode('utf-8'))
     doc.prettify().encode('utf-8')
 
+    # regex determines whether data is a connection and then classifies it by division and number of courses
     connectionNames = re.compile(r'CONX [0-9][0-9][0-9][0-9][0-9]')
     descriptions = re.compile(r'[A-Z][a-z][a-z][a-z]?[a-z]? |(or three) course connection')
     three = re.compile(r'.*(three).*')
@@ -57,6 +59,8 @@ def main():
         else:
             qaList.append("False")
 
+    # gets individual course data from connections
+    # formats data and writes to graph.json and connections.json
     courseNum = re.compile(r'[A-Z]{2,4} [0-9]{3}')
     orCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([A-Z]{2,4} [0-9]{3})(?:(?!with).)*| ([A-Z]{2,4} [0-9]{3})(?:(?!with).)* or ([0-9]{3})(?:(?!with).)*')
     andCourse = re.compile(r'([A-Z]{2,4} [0-9]{3})(?:(?!or).)* with ([A-Z]{2,4} [0-9]{3})(?:(?!or).)*')
@@ -66,6 +70,7 @@ def main():
     linkList = []
     newDepartment = {}
     
+    # writes graph.json for d3 force-directed graph on visualize page
     with open('graph.json', 'w') as graphFile:
         graphFile.write("{\"nodes\": [\n")
         # Add Departments
@@ -177,6 +182,7 @@ def main():
             else:
                 graphFile.write('\t'+str(newDepartment).replace('\'', '"')+'\n')
 
+        # writes links to specify which nodes to connect in graph
         graphFile.write("],\n\"links\": [\n")
 
         for i in xrange(len(connectionList)):
@@ -192,6 +198,7 @@ def main():
 
         graphFile.write("]}")
 
+        # connections.json for filter page
         with open('connections.json', 'w') as outputFile:
             outputFile.write("{\"ConnectionDescriptions\": [\n")
             for i in xrange(len(nameList)-1):

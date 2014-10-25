@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	// gets connections.json data, creates new div with classes for each connection on success
 	$.ajax(
 	{      
   		type: 'GET',
@@ -11,7 +12,6 @@ $(document).ready(function() {
 		success: function (data) {
 			
 			var connections = data["ConnectionDescriptions"];
-
 			var i = 1;
 
 			$.each(connections, function() {
@@ -60,7 +60,8 @@ $(document).ready(function() {
 		alert("hatada:" + xhr.responseXML);
   		}
 	}); 
-
+	
+	// hides or shows each connection based on changes in the form 
 	$('.uk-form').change(function(){
 
 		$('.connection').each(function() {
