@@ -33,7 +33,7 @@ def main():
         if connectionNames.match(content):
             nameList.append(str(content).replace('\'','`'))
         if descriptions.match(content):
-            descriptionList.append(str(content).replace('\'','`').replace('\n', ' '))
+            descriptionList.append(str(content).replace('\'','`').replace('\n', ' ').replace('THA', 'THEA'))
 
     for i in range(len(descriptionList)):
         if three.match(descriptionList[i]):
