@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 				currentText = $("#jsonfill").html();
 
-				$("#jsonfill").html(currentText + "<div id='con" + i + "' <br>" + Name + "<br>" + Description.substring(0, end) + "</div>");
+				$("#jsonfill").html(currentText + "<div id='con" + i + "' <br><h3>" + Name + "</h3><p>" + Description.substring(0, end) + "</p></div>");
 								
 				var newdiv = "#con" + i
 
