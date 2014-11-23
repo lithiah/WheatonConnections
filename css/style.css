@@ -69,6 +69,10 @@ h3 {
 	color: white;
 }
 
+#jsonfill h3 {
+	color: #008cba;
+}
+
 
 .hint {
     position: fixed;
