@@ -84,12 +84,14 @@ def main():
                         departmentList.append(str(oneDepartment))
 
         connectionList = []
+        
 
         # Add Courses
         for i in xrange(len(descriptionList)):
             oneRow = descriptionList[i].replace('\n', ' ')
             if courseNum.search(oneRow):
                 matchCourse = courseNum.findall(oneRow)
+                # print matchCourse
                 for j in xrange(len(matchCourse)):
                     if not matchCourse[j] in departmentList:
                         departmentList.append(str(matchCourse[j]))
@@ -97,6 +99,13 @@ def main():
                         tempList.append(str(matchCourse[j][0:(len(matchCourse[j])-4)]))
                         tempList.append(str(matchCourse[j]))
                         connectionList.append(tempList)
+
+                if len(matchCourse) == 2:
+                    print matchCourse
+                    tempList = []
+                    tempList.append(str(matchCourse[0]))
+                    tempList.append(str(matchCourse[1]))
+                    connectionList.append(tempList)
 
         # Add Connections
         for i in xrange(len(descriptionList)):
@@ -106,6 +115,8 @@ def main():
                 groupTwo = []
                 count = 0
                 matchCourse = orCourse.findall(oneRow)
+                # print matchCourse
+
                 for j in xrange(len(matchCourse)):
                     oneCourse = matchCourse[j]
                     if not oneCourse in connectionList:
@@ -127,6 +138,7 @@ def main():
                             tempList.append(str(oneCourse[2][0:(len(oneCourse[2])-4)])+' '+str(oneCourse[3]))
                             tempList.append(str(oneCourse[2][0:(len(oneCourse[2])-4)]))
                             connectionList.append(tempList)
+                
 
                 for j in xrange(len(groupOne)):
                     for k in xrange(len(groupTwo)):
@@ -135,8 +147,16 @@ def main():
                         tempList.append(groupTwo[k])
                         connectionList.append(tempList)
 
+                # for m in xrange(len(descriptionList)):
+                #     print descriptionList[m]
+
+                # for m in xrange(len(connectionList)):
+                #     print connectionList[m]
+
             elif andCourse.search(oneRow):
                 matchCourse = andCourse.findall(oneRow)
+                # print matchCourse
+
                 for j in xrange(len(matchCourse)):
                     oneCourse = matchCourse[j]
                     if not oneCourse in connectionList:
@@ -147,6 +167,8 @@ def main():
 
             if andOrCourse.search(oneRow):
                 matchCourse = andOrCourse.findall(oneRow)
+                # print matchCourse
+
                 for j in xrange(len(matchCourse)):
                     oneCourse = matchCourse[j]
                     tempListOne = []
