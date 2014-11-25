@@ -150,8 +150,7 @@ def main():
                 # for m in xrange(len(descriptionList)):
                 #     print descriptionList[m]
 
-                # for m in xrange(len(connectionList)):
-                #     print connectionList[m]
+                
 
             elif andCourse.search(oneRow):
                 matchCourse = andCourse.findall(oneRow)
@@ -196,6 +195,9 @@ def main():
                     tempListTwo.append(oneCourse[4])
                     if not tempListTwo in connectionList:
                         connectionList.append(tempListTwo)
+
+        for m in xrange(len(connectionList)):
+                    print connectionList[m]
 
         for i in xrange(len(departmentList)):
             newDepartment.update({"name":departmentList[i]})
